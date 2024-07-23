@@ -5,7 +5,7 @@ module "network" {
 
 # Module pour le groupe de sécurité
 module "security_group" {
-  source = "./Modules/security-group"
+  source = "../Modules/security-group"
   vpc_id = module.network.vpc_id
 }
 
@@ -21,7 +21,7 @@ module "volume_ebs" {
 
 # Module pour le service ECS
 module "ecs_service" {
-  source = "./Modules/ecs-service"
+  source = "../Modules/ecs-service"
   cluster_id          = module.ecs_cluster.cluster_id
   security_group_id   = module.security_group.security_group_id
   subnet_ids          = module.network.subnet_ids
