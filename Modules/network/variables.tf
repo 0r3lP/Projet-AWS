@@ -3,5 +3,3 @@ variable "region" {
   type        = string
   default     = "us-east-1"
 }
-
-data "aws_availability_zones" "available" {}

@@ -42,7 +42,3 @@ resource "aws_security_group_rule" "allow_ssh" {
   cidr_blocks     = ["0.0.0.0/0"]
   security_group_id = aws_security_group.mongodb_instance_sg.id
 }
-
-output "instance_id" {
-  value = aws_instance.mongodb_instance.id
-}

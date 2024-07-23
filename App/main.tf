@@ -1,3 +1,6 @@
+# Permet d'obtenir les zones de disponibilités disponibles
+data "aws_availability_zones" "available" {}
+
 # Module pour la configuration réseau 
 module "network" {
   source = "../Modules/network"
@@ -14,9 +17,20 @@ module "ecs_cluster" {
   source = "../Modules/ecs-cluster"
 }
 
+# Module pour l'instance ECS
+module "ecs_instance" {
+  source = "../Modules/ecs-instance"
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+  subnet_ids    = module.network.subnet_ids
+  vpc_id        = module.network.vpc_id
+}
+
 # Module pour le volume EBS
 module "volume_ebs" {
   source = "../Modules/volume-ebs"
+  availability_zone = data.aws_availability_zones.available.names[0] 
+  instance_id = module.ecs_instance.instance_id
 }
 
 # Module pour le service ECS
