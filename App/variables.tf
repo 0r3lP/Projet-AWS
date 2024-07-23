@@ -1,5 +1,10 @@
-variable "aws_region" {
-  description = "La région AWS où déployer les ressources"
+variable "project_name" {
+  description = "Le nom du projet"
   type        = string
-  default     = "us-east-1"
+  default     = "mongodb-ecs-fargate"
+}
+
+variable "vpc_id" {
+  description = "ID du VPC où le cluster ECS sera déployé"
+  type        = string
 }
